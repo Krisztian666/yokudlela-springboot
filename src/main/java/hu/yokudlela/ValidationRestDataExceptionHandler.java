@@ -1,40 +1,22 @@
-package hu.yokudlela.table.application.error;
+package hu.yokudlela;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.validation.ConstraintViolationException;
-import javax.validation.UnexpectedTypeException;
-
-import hu.yokudlela.table.business.BusinessException;
-import hu.yokudlela.table.business.DataValidationException;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
+import jakarta.validation.UnexpectedTypeException;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.ConversionNotSupportedException;
-import org.springframework.beans.TypeMismatchException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.convert.ConversionFailedException;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.HttpMessageNotWritableException;
 import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindException;
-import org.springframework.validation.FieldError;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.HttpMediaTypeNotAcceptableException;
-import org.springframework.web.HttpMediaTypeNotSupportedException;
-import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
-import org.springframework.web.bind.MissingPathVariableException;
-import org.springframework.web.bind.MissingServletRequestParameterException;
-import org.springframework.web.bind.ServletRequestBindingException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.context.request.WebRequest;
-import org.springframework.web.context.request.async.AsyncRequestTimeoutException;
-import org.springframework.web.multipart.support.MissingServletRequestPartException;
-import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
 /**
@@ -43,7 +25,7 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 @ControllerAdvice
 @Component
 @Slf4j
-public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionHandler{
+public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionHandler {
     @Autowired
     HttpServletRequest req;
 
@@ -97,22 +79,19 @@ public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionH
     
    @ResponseBody
    @Override
-   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex,
-                 HttpHeaders headers, HttpStatus status, WebRequest request) {
-
-        log.error(ex.getLocalizedMessage(), ex);
+   protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
+       log.error(ex.getLocalizedMessage(), ex);
        ApiError res = new ApiError(req.getRequestURI(),"error.validation");
 
        ex.getBindingResult().getAllErrors().forEach((ObjectError error) -> {
            res.getErrors().add(
                    (error.getDefaultMessage().indexOf(' ')>0)?"error.validation.bind":error.getDefaultMessage());
        });
-      
-        return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
-    
-    }
 
-    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+       return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
+   }
+    @Override
+    protected ResponseEntity<Object> handleBindException(BindException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         log.error(ex.getLocalizedMessage(), ex);
         ApiError res = new ApiError(req.getRequestURI(),"error.validation");
 
@@ -125,7 +104,7 @@ public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionH
     }
 
     @Override
-    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleHttpMessageNotReadable(HttpMessageNotReadableException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
         log.error(ex.getLocalizedMessage(), ex);
         ApiError res = new ApiError(req.getRequestURI(),"error.validation");
 
