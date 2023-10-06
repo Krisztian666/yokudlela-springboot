@@ -22,7 +22,8 @@ import java.util.stream.Stream;
 public class ReservationRest {
 
     @GetMapping(path = "/reservations")
-    public List<Reservation> getReservations(LocalDateTime pBegin, LocalDateTime pEndn){
+    @Operation(summary = "Aktív rendelések lekérdezése", description = "a megadott két intervallum között lekérdezi az aktív asztalfoglalásokat")
+    public List<Reservation> getReservations(TimeIntervallRequest pTime){
         return Stream.of(new Reservation()).collect(Collectors.toList());
     }
 
