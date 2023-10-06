@@ -5,6 +5,8 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.persistence.Column;
+import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -21,13 +23,12 @@ import java.time.LocalDateTime;
 public class TimeIntervallRequest {
 
     @Schema(description = "Foglalás kezdete", example = "2021-10-10T10:00:10")
-    @NotBlank(message = "error.reservation.name.notset")
-    @NotNull(message = "error.reservation.name.notset")
-    private String contact;
-
-    @Schema(description = "Foglalás kezdete", example = "2021-10-10T10:00:10")
     @JsonDeserialize(using = LocalDateTimeDeserializer.class)
     @JsonSerialize(using = LocalDateTimeSerializer.class)
     private LocalDateTime begin;
 
+    @Schema(description = "Foglalás vége", example = "2021-10-10T10:00:10")
+    @Future(message = "error.reservation.begin.past")
+    @Column(name = "endtime")
+    private LocalDateTime end;
 }
