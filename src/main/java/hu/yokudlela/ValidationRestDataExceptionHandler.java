@@ -79,13 +79,16 @@ public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionH
     
    @ResponseBody
    @Override
+   /**
+    * error value of object example not LocalDateTime
+    */
    protected ResponseEntity<Object> handleMethodArgumentNotValid(MethodArgumentNotValidException ex, HttpHeaders headers, HttpStatusCode status, WebRequest request) {
        log.error(ex.getLocalizedMessage(), ex);
        ApiError res = new ApiError(req.getRequestURI(),"error.validation");
 
        ex.getBindingResult().getAllErrors().forEach((ObjectError error) -> {
            res.getErrors().add(
-                   (error.getDefaultMessage().indexOf(' ')>0)?"error.validation.bind":error.getDefaultMessage());
+                   (error.getDefaultMessage().indexOf(' ')>0)?"error.validation.MethodArgumentNotValid":error.getDefaultMessage());
        });
 
        return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
@@ -97,7 +100,7 @@ public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionH
 
         ex.getBindingResult().getAllErrors().forEach((ObjectError error) -> {
             res.getErrors().add(
-                    (error.getDefaultMessage().indexOf(' ')>0)?"error.validation.bind":error.getDefaultMessage());
+                    (error.getDefaultMessage().indexOf(' ')>0)?"error.validation.Bind":error.getDefaultMessage());
         });
 
         return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
@@ -109,7 +112,7 @@ public class ValidationRestDataExceptionHandler extends ResponseEntityExceptionH
         ApiError res = new ApiError(req.getRequestURI(),"error.validation");
 
             res.getErrors().add(
-                    (ex.getLocalizedMessage().indexOf(' ')>0)?"error.validation.bind":ex.getLocalizedMessage());
+                    (ex.getLocalizedMessage().indexOf(' ')>0)?"error.validation.HttpMessageNotReadable":ex.getLocalizedMessage());
 
         return new ResponseEntity<>(res, HttpStatus.BAD_REQUEST);
     }

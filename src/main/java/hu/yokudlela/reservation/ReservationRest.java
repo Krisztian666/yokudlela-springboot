@@ -8,10 +8,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotBlank;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,35 +19,30 @@ import java.util.stream.Stream;
 @RestController("reservation")
 public class ReservationRest {
 
-    @GetMapping(path = "/reservations")
+    @GetMapping(path = "/")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Sikeres hívás"),
+                    @ApiResponse(responseCode = "400", description = "Rossz hívási paraméterek"),
+                    @ApiResponse(responseCode = "500", description = "Működési hiba"),
+            }
+    )
     @Operation(summary = "Aktív rendelések lekérdezése", description = "a megadott két intervallum között lekérdezi az aktív asztalfoglalásokat")
-    public List<Reservation> getReservations(TimeIntervallRequest pTime){
+    public List<Reservation> get(@Valid TimeIntervallRequest pTime){
         return Stream.of(new Reservation()).collect(Collectors.toList());
     }
 
+    @PostMapping(path = "/")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sikeres hívás"),
-                    @ApiResponse(responseCode = "500", description = "Rossz hívási paraméter")
+                    @ApiResponse(responseCode = "400", description = "Rossz hívási paraméterek"),
+                    @ApiResponse(responseCode = "500", description = "Működési hiba"),
             }
     )
-    @GetMapping(path = "/hello/{path}")
-    public String hello(
-            @NotBlank @Parameter(description = "query name ") @RequestParam(name="name") String pName,
-            @Parameter(description = "Path name ") @PathVariable(name = "path")String pPath){
-        return "HELLO ".concat(pName).concat(pPath).concat("!");
-    }
-
-    @ApiResponses(
-            value = {
-                    @ApiResponse(responseCode = "200", description = "Sikeres hívás"),
-                    @ApiResponse(responseCode = "400", description = "Rossz hívási paraméter")
-            }
-    )
-    @Operation(summary = "Összetett helló", description = "Nagyon profi hello")
-    @GetMapping(path = "/helloobject")
-    public String hello(@Valid Name pName){
-        return "HELLO ".concat(pName.getLname()).concat(pName.getFname()).concat("!");
+    @Operation(summary = "Új foglalás rögzítése", description = "....")
+    public void add(@Valid ReservationRequest pRes){
+//        return Stream.of(new Reservation()).collect(Collectors.toList());
     }
 
 }
