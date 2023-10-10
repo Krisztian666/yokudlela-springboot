@@ -1,4 +1,4 @@
-package hu.yokudlela.table;
+package hu.yokudlela.functions.table;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -47,5 +47,5 @@ public interface TableRepository extends CrudRepository<Table, Long> {
             @ApiResponse(responseCode = "404", description = "No table with this capacity",
                     content = @Content(schema = @Schema(implementation = Table.class), mediaType = MediaType.APPLICATION_JSON_VALUE))
     })
-    public List<Table> findByAvailableTrue();
+    public List<Table> findByAvailable(boolean pAvailable);
 }

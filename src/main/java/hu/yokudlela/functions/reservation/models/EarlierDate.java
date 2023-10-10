@@ -1,10 +1,11 @@
-package hu.yokudlela.reservation;
+package hu.yokudlela.functions.reservation.models;
 
 
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import jakarta.validation.Payload;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.expression.spel.standard.SpelExpressionParser;
 
 import java.lang.annotation.*;
@@ -24,6 +25,7 @@ public @interface EarlierDate {
     Class<? extends Payload>[] payload() default {};
 }
 
+@Slf4j
 class BeginForEndBeforeValidator implements ConstraintValidator<EarlierDate, Object> {
     private static final SpelExpressionParser PARSER = new SpelExpressionParser();
     String earlier;
@@ -39,9 +41,13 @@ class BeginForEndBeforeValidator implements ConstraintValidator<EarlierDate, Obj
 
     @Override
     public boolean isValid(Object value, ConstraintValidatorContext context) {
+        log.info("Earlier:"+earlier);
+        log.info("Earlier:"+later);
         if(earlier!=null && later!=null){
             var begin = (LocalDateTime)PARSER.parseExpression(earlier).getValue(value);
             var end = (LocalDateTime)PARSER.parseExpression(later).getValue(value);
+            log.info("Begin:"+begin.toString());
+            log.info("End:"+end);
             if(begin!=null && end!=null && begin.isBefore(end)){
                 return true;
             }

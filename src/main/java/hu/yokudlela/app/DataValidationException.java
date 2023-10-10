@@ -1,4 +1,4 @@
-package hu.yokudlela;
+package hu.yokudlela.app;
 
 public class DataValidationException extends RuntimeException {
 

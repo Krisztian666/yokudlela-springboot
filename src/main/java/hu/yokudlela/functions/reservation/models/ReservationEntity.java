@@ -1,4 +1,4 @@
-package hu.yokudlela.reservation;
+package hu.yokudlela.functions.reservation.models;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
@@ -32,7 +32,7 @@ import org.hibernate.annotations.Parameter;
 @Entity
 @jakarta.persistence.Table(name = "ukubhuka")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
-public class Reservation {
+public class ReservationEntity {
 
     @Id
     @GeneratedValue(generator = "UUID")
@@ -75,7 +75,7 @@ public class Reservation {
     @Schema(description = "Lefoglalt asztal")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = false)
-    private List<hu.yokudlela.table.Table> table;
+    private List<hu.yokudlela.functions.table.Table> table;
 
     @Schema(description = "Személyek száma")
     @Min(value = 1, message = "error.reservation.person.few")

@@ -1,19 +1,16 @@
-package hu.yokudlela.table;
+package hu.yokudlela.functions.table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
+import lombok.*;
 
 
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
+import lombok.experimental.FieldNameConstants;
 
 @Entity
 @Data
@@ -22,6 +19,7 @@ import jakarta.validation.constraints.Size;
 @Builder
 @Schema(description = "Asztal")
 @jakarta.persistence.Table(name = "itafula")
+@EqualsAndHashCode(exclude = {"name","available","capacity"})
 public class Table {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -1,4 +1,4 @@
-package hu.yokudlela.reservation;
+package hu.yokudlela.functions.reservation.models;
 
 import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;

@@ -1,4 +1,4 @@
-package hu.yokudlela;
+package hu.yokudlela.app;
 
 /**
  * @author (K)risztian
