@@ -14,6 +14,7 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Validated
@@ -30,7 +31,7 @@ public class ReservationController {
     @Autowired
     private ReservationRepository repReservation;
 
-    @GetMapping(path = "")
+    @GetMapping(path = "/byTimeIntervall")
     @ApiResponses(
             value = {
                     @ApiResponse(responseCode = "200", description = "Sikeres hívás"),
@@ -40,7 +41,11 @@ public class ReservationController {
     )
     @Operation(summary = "Aktív rendelések lekérdezése", description = "a megadott két intervallum között lekérdezi az aktív asztalfoglalásokat")
     public List<ReservationEntity> get(@Valid TimeIntervallRequest pTime) {
-        return this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd());
+          return      this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd());
+
+//        return modelMapper.map(
+//                this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd()),
+//                ArrayList.class);
 
     }
 
