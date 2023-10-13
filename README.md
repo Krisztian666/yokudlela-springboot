@@ -4,14 +4,14 @@ Asztalkezelés és foglalás Rest API lokális H2 adatbázissal, validációval 
 
 Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem számára 
 * asztalok felvitelére,
- * Minden asztal rendelkezik egy egyedi névvel, nem vihető fel olyan új asztal aminek neve már létezik az étteremben
+  * Minden asztal rendelkezik egy egyedi névvel, nem vihető fel olyan új asztal aminek neve már létezik az étteremben
 * meglévő asztalok törlésére,
- * csak olyan asztal törölhető amelyen nincs és nem is volt foglalás 
+  * csak olyan asztal törölhető amelyen nincs és nem is volt foglalás 
 * asztalok vendégek számára foglalható és nem foglaható státusz kezelésére
 * vendégek számára foglalás megvalósítására
- * egy vendég neve elérhetősége megadásával adott időintervallumra megadott ülőhelyet foglal, a rendszer automatikusan határozza meg hogy ezen ülőhelyeket hány és melyik asztalokkal lehet biztosítani (nem az optimalizáció a cél) 
+  * egy vendég neve elérhetősége megadásával adott időintervallumra megadott ülőhelyet foglal, a rendszer automatikusan határozza meg hogy ezen ülőhelyeket hány és melyik asztalokkal lehet biztosítani (nem az optimalizáció a cél) 
 * Meglévő foglalások törlésére
- * ha nem érvényes foglalást szeretne törölni akkor jelezzük vissza 
+  * ha nem érvényes foglalást szeretne törölni akkor jelezzük vissza 
 
 ## Adatbázis kezelés
 * [Spring data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html)
