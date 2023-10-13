@@ -1,4 +1,4 @@
-# 01 - Asztalkezelés és foglalás Rest API lokális H2 adatbázissal, validációval és tisztességes hibakezeléssel
+# 01 - Asztalkezelés és foglalás Rest API (lokális H2 adatbázissal, validációval, hibakezeléssel)
 
 Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem számára 
 * asztalok felvitelére,
