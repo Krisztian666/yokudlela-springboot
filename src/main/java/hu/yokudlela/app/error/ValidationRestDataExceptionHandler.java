@@ -1,4 +1,4 @@
-package hu.yokudlela.app;
+package hu.yokudlela.app.error;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.validation.ConstraintViolationException;

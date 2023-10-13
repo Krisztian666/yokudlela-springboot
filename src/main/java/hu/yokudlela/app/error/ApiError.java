@@ -1,4 +1,4 @@
-package hu.yokudlela.app;
+package hu.yokudlela.app.error;
 
 import java.util.LinkedHashSet;
 import java.util.Set;

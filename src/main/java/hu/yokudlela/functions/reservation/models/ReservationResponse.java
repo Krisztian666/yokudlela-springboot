@@ -1,18 +1,14 @@
 package hu.yokudlela.functions.reservation.models;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.databind.annotation.JsonDeserialize;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
+import hu.yokudlela.app.serializer.ContactSerializer;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.persistence.*;
-import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.annotations.Parameter;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -46,8 +42,7 @@ public class ReservationResponse {
     private LocalDateTime end;
 
     @Schema(description = "Lefoglalt asztal")
-    @JsonSerialize()
-    private List<hu.yokudlela.functions.table.Table> table;
+    private List<String> tableName;
 
     @Schema(description = "Személyek száma")
     private byte person;

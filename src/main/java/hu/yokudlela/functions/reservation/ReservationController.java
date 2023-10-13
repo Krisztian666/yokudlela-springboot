@@ -1,6 +1,6 @@
 package hu.yokudlela.functions.reservation;
 
-import hu.yokudlela.app.ApiError;
+import hu.yokudlela.app.error.ApiError;
 import hu.yokudlela.functions.reservation.models.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -14,7 +14,6 @@ import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 @Validated
@@ -40,13 +39,10 @@ public class ReservationController {
             }
     )
     @Operation(summary = "Aktív rendelések lekérdezése", description = "a megadott két intervallum között lekérdezi az aktív asztalfoglalásokat")
-    public List<ReservationEntity> get(@Valid TimeIntervallRequest pTime) {
-          return      this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd());
-
-//        return modelMapper.map(
-//                this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd()),
-//                ArrayList.class);
-
+    public List<ReservationResponse> get(@Valid TimeIntervallRequest pTime) {
+        return this.repReservation.findByBeginBetweenOrEndBetween(pTime.getBegin(),pTime.getEnd(),pTime.getBegin(),pTime.getEnd())
+                .stream()
+                .map(src->modelMapper.map(src,ReservationResponse.class)).toList();
     }
 
     @PostMapping(path = "")
@@ -68,6 +64,21 @@ public class ReservationController {
         return modelMapper.map(this.servReservation.bookingTables(pRes), ReservationIdResponse.class);
     }
 
+    @DeleteMapping(path = "")
+    @ApiResponses(
+            value = {
+                    @ApiResponse(responseCode = "200", description = "Sikeres hívás"),
+                    @ApiResponse(responseCode = "400",
+                            description = "Rossz hívási paraméterek",
+                            content = {
+                                    @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                            schema = @Schema(implementation = ApiError.class))}),
+                    @ApiResponse(responseCode = "500", description = "Működési hiba", content = {
+                            @Content(mediaType = MediaType.APPLICATION_JSON_VALUE,
+                                    schema = @Schema(implementation = ApiError.class))})
+            }
+    )
+    @Operation(summary = "Meglévő foglalás törlése", description = "Felszabadít egy vagy több asztalt")
     public void delete(@Valid ReservationIdRequest pId){
         this.repReservation.deleteById(pId.getId());
     }

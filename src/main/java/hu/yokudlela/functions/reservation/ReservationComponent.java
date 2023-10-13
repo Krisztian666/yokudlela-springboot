@@ -1,6 +1,6 @@
 package hu.yokudlela.functions.reservation;
 
-import hu.yokudlela.app.BusinessException;
+import hu.yokudlela.app.error.BusinessException;
 import hu.yokudlela.functions.table.TableRepository;
 import hu.yokudlela.functions.reservation.models.ReservationEntity;
 import hu.yokudlela.functions.reservation.models.ReservationRequest;
