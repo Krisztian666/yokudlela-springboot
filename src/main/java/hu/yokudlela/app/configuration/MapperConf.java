@@ -15,7 +15,7 @@ public class MapperConf {
         ModelMapper mapper =new ModelMapper();
         mapper.addConverter(new TableNameConverter());
         TypeMap<ReservationEntity, ReservationResponse> propertyMapper = mapper.createTypeMap(ReservationEntity.class, ReservationResponse.class);
-        propertyMapper.addMapping(ReservationEntity::getTable, ReservationResponse::setTableName);
+        propertyMapper.addMapping(ReservationEntity::getTableEntity, ReservationResponse::setTableName);
         return mapper;
     }
 

@@ -4,7 +4,7 @@ import hu.yokudlela.app.error.BusinessException;
 import hu.yokudlela.functions.table.TableRepository;
 import hu.yokudlela.functions.reservation.models.ReservationEntity;
 import hu.yokudlela.functions.reservation.models.ReservationRequest;
-import hu.yokudlela.functions.table.Table;
+import hu.yokudlela.functions.table.models.TableEntity;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,21 +30,22 @@ public class ReservationComponent {
     private ModelMapper modelMapper;
 
     public ReservationEntity bookingTables(ReservationRequest pData){
-        List<Table> tables=repTable.findByAvailable(true);
+        List<TableEntity> tableEntities =repTable.findByAvailable(true);
         List<ReservationEntity> reservations=repReservation.findByBeginBetweenOrEndBetween(pData.getBegin(),pData.getEnd(),pData.getBegin(),pData.getEnd());
         reservations.forEach(
                 reservation -> {
-                    reservation.getTable().forEach(t->{tables.remove(t);});
+                    reservation.getTableEntity().forEach(t->{
+                        tableEntities.remove(t);});
                 });
-        if(tables.isEmpty()){
+        if(tableEntities.isEmpty()){
             throw new BusinessException("error.reservation.nofreetables");
         }
-        List<Table> res;
-        res = oneTableEqualOrMoreCapacity(tables, pData.getPerson());
+        List<TableEntity> res;
+        res = oneTableEqualOrMoreCapacity(tableEntities, pData.getPerson());
         if(res.isEmpty()) {
-            res = multipleTables(tables, pData.getPerson());
+            res = multipleTables(tableEntities, pData.getPerson());
         }
-        int capacitySum=res.stream().mapToInt(Table::getCapacity).sum();
+        int capacitySum=res.stream().mapToInt(TableEntity::getCapacity).sum();
         if(capacitySum>=pData.getPerson()){
             return saveReservation(pData,res);
         }
@@ -53,28 +54,28 @@ public class ReservationComponent {
         }
     }
 
-    private List<Table> oneTableEqualOrMoreCapacity(List<Table> tables, byte pCapacity){
-        List list = tables.stream()
+    private List<TableEntity> oneTableEqualOrMoreCapacity(List<TableEntity> tableEntities, byte pCapacity){
+        List list = tableEntities.stream()
                 .filter(table->table.getCapacity()>= pCapacity)
                 .toList()
-                .stream().sorted(Comparator.comparingInt(Table::getCapacity))
+                .stream().sorted(Comparator.comparingInt(TableEntity::getCapacity))
                 .toList();
 
         return (list.isEmpty())?list:list.subList(0,1);
 
     }
-    private List<Table> multipleTables(List<Table> tables, byte pCapacity){
-        List<Table> list = tables.stream()
-                .sorted(Comparator.comparingInt(Table::getCapacity).reversed())
+    private List<TableEntity> multipleTables(List<TableEntity> tableEntities, byte pCapacity){
+        List<TableEntity> list = tableEntities.stream()
+                .sorted(Comparator.comparingInt(TableEntity::getCapacity).reversed())
                 .toList();
         AtomicInteger capacityOfTables = new AtomicInteger(0);
-        List res = list.stream().takeWhile(table->((capacityOfTables.getAndAdd(table.getCapacity()))<=pCapacity)).toList();
-        return res;
+        return  list.stream().takeWhile(table->((capacityOfTables.getAndAdd(table.getCapacity()))<=pCapacity)).toList();
+
     }
 
-    private ReservationEntity saveReservation(ReservationRequest pData, List<Table> tables){
+    private ReservationEntity saveReservation(ReservationRequest pData, List<TableEntity> tableEntities){
         ReservationEntity entity = modelMapper.map(pData, ReservationEntity.class);
-        entity.setTable(tables);
+        entity.setTableEntity(tableEntities);
         return repReservation.save(entity);
     }
 

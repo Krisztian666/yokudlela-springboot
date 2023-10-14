@@ -1,4 +1,4 @@
-package hu.yokudlela.functions.hello;
+package hu.yokudlela.functions.table.models;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -6,13 +6,15 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Name {
-    @Schema(description = "First Name")
-    private String fname;
-    @Schema(description = "Last Name")
-    private String lname;
+@Schema(description = "Asztal azonosító")
+public class TableIdResponse {
+    @Schema(description = "Az asztal belső azonosítója")
+    private long id;
 }
+
+

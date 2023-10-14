@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
 import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 import hu.yokudlela.app.serializer.ContactSerializer;
+import hu.yokudlela.functions.table.models.TableEntity;
 import io.swagger.v3.oas.annotations.media.Schema;
 import java.time.LocalDateTime;
 import java.util.List;
@@ -76,7 +77,7 @@ public class ReservationEntity {
     @Schema(description = "Lefoglalt asztal")
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "table_id", nullable = false)
-    private List<hu.yokudlela.functions.table.Table> table;
+    private List<TableEntity> tableEntity;
 
     @Schema(description = "Személyek száma")
     @Min(value = 1, message = "error.reservation.person.few")

@@ -1,7 +1,6 @@
-package hu.yokudlela.functions.reservation.models;
+package hu.yokudlela.functions.table.models;
 
-
-import hu.yokudlela.functions.reservation.ReservationRepository;
+import hu.yokudlela.functions.table.TableRepository;
 import jakarta.validation.Constraint;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
@@ -14,8 +13,8 @@ import java.lang.annotation.*;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-@Constraint(validatedBy = ReservationIdExistValidator.class)
-public @interface ReservationIdExist {
+@Constraint(validatedBy = TableIdExistValidator.class)
+public @interface TableIdExist {
 
     String message();// default "{EarlierDate.message}";
     Class<?>[] groups() default {};
@@ -23,20 +22,20 @@ public @interface ReservationIdExist {
 }
 
 @Slf4j
-class ReservationIdExistValidator implements ConstraintValidator<ReservationIdExist, String> {
+class TableIdExistValidator implements ConstraintValidator<TableIdExist, Long> {
     String message;
 
     @Autowired
-    private ReservationRepository repoReservation;
+    private TableRepository repoTable;
 
     @Override
-    public void initialize(ReservationIdExist constraintAnnotation) {
+    public void initialize(TableIdExist constraintAnnotation) {
         message = constraintAnnotation.message();
     }
 
     @Override
-    public boolean isValid(String value, ConstraintValidatorContext context) {
-        if(this.repoReservation.existsById(value)){
+    public boolean isValid(Long value, ConstraintValidatorContext context) {
+        if(this.repoTable.existsById(value)){
             return true;
         }
         context
