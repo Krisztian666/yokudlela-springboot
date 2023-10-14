@@ -23,9 +23,9 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
             <artifactId>h2</artifactId>
         </dependency>
 ```
-* [Spring data JPA](https://docs.spring.io/spring-data/jpa/docs/current/reference/html)
-* [Jakarta Persistence](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.html)
-* [Példa - baeldung](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
+* [Spring data JPA -doc ](https://docs.spring.io/spring-data/jpa/docs/current/reference/html)
+* [Jakarta Persistence - doc](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.html)
+* [Example - baeldung](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
 
   
 ## Validáció
@@ -43,7 +43,10 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
 * [Jakarta Bean Validation -doc](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
 * [Jakarta Bean Validation -api](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary)
 * [Spring validation -doc](https://spring.io/guides/gs/validating-form-input/)
-* [Példa - baeldung](https://www.baeldung.com/spring-boot-bean-validation)
+* [UseCase - ismételhető annotációk](https://blog.hackajob.com/type-and-repeatable-annotations-explained/)
+* [Example - baeldung](https://www.baeldung.com/spring-boot-bean-validation)
+* [Example - Tom Hombergs](https://reflectoring.io/bean-validation-with-spring-boot/)
+* 
 
 ## Adatok másololás objektum lépdányok között
 ```
