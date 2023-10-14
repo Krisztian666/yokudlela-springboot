@@ -1,4 +1,5 @@
 # 00 - Rest API (Springboot, Rest, OpenApi, Lombok)
+[youtube](https://youtu.be/82JK4TvSa9s)
 
 Kedvcsináló (nem kapcsolódik a valós feladathoz)
 * Springboot alkalmazás 
