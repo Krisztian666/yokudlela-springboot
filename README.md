@@ -40,8 +40,9 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
             <version>3.0.2</version>
         </dependency>
 ```
-* [Jakarta Bean Validation](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
-* [Spring validation](https://spring.io/guides/gs/validating-form-input/)
+* [Jakarta Bean Validation -doc](https://jakarta.ee/specifications/bean-validation/3.0/jakarta-bean-validation-spec-3.0.html)
+* [Jakarta Bean Validation -api](https://jakarta.ee/specifications/bean-validation/3.0/apidocs/jakarta/validation/constraints/package-summary)
+* [Spring validation -doc](https://spring.io/guides/gs/validating-form-input/)
 * [Példa - baeldung](https://www.baeldung.com/spring-boot-bean-validation)
 
 ## Adatok másololás objektum lépdányok között
@@ -57,7 +58,7 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
 
 # Feladat
 Valósítsd meg azt a pincér funkcionalitást mely során
-* Lehetőség van adott asztalhoz az étel és ital lap alapján tetszőleges mennyiségú meglévő tétel rendelésére
+* Lehetőség van adott asztalhoz az étel és ital lap alapján tetszőleges mennyiségú meglévő tétel rendelésére 
   * Az elemekhez lehessen megjegyzést tenni pl: sósan, jól átsütve, jéggel, szobahőmérségleten stb kéri a vendég.
   * Egy tételből több is rendelhető
 * legyen lehetőség az egyes rendelt elemek státuszának lekérdezésére
