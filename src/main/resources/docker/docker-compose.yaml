@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    environment:
+      - POSTGRES_USER= yokudlela
+      - POSTGRES_PASSWORD= yokudlela
+    ports:
+      - '5432:5432'
+    restart: on-failure
+    volumes:
+      - /home/user/yokudlela/table/table-spring/src/main/resources/docker/init-db/psql/:/docker-entrypoint-initdb.d/
+      - /home/user/yokudlela/disks/psql/data:/var/lib/postgresql/data
