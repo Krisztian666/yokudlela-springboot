@@ -2,7 +2,7 @@ FROM openjdk:21
 ENV LANG C.UTF-8
 
 RUN mkdir -p /opt
-ADD maven/opt/Yokudlela-01.jar /opt/table-spring.jar
+ADD maven/opt/table-spring.jar /opt/table-spring.jar
 
 
 EXPOSE 8080
