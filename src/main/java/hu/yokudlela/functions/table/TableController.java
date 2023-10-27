@@ -12,6 +12,7 @@ import java.util.List;
 @RestController("table")
 @RequestMapping("/table")
 @Validated
+@CrossOrigin
 public class TableController {
     @Autowired
     private TableRepository repoTable;
