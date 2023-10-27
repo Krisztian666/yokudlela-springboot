@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 @RestController("table")
 @RequestMapping("/table")
@@ -26,6 +28,8 @@ public class TableController {
         return repoTable.save(tbl);
     }
 
+
+
     @Validated(TableAvailableIsTrueGroup.class)
     @PatchMapping("/disable")
     public TableEntity disable(@Valid @RequestBody TableIdRequest pId){
@@ -38,6 +42,15 @@ public class TableController {
     @DeleteMapping("")
     public void delete(TableIdRequest pdata){
         this.repoTable.deleteById(pdata.getId());
+    }
+
+    @GetMapping("/cannotbeused")
+    public List<TableEntity> getNotUse(){
+        return this.repoTable.findByAvailable(false);
+    }
+    @GetMapping("/usable")
+    public List<TableEntity> getUse(){
+        return this.repoTable.findByAvailable(true);
     }
 
 }
