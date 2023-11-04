@@ -1,4 +1,3 @@
-CREATE USER yokudlela;
 CREATE DATABASE yokudlela_iam;
 CREATE DATABASE yokudlela_table;
 CREATE DATABASE yokudlela_menu;

@@ -1,0 +1,60 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="user (generated)" id="1699127659140-1">
+        <createTable tableName="itafula">
+            <column autoIncrement="true" name="id" type="BIGINT">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="itafula_pkey"/>
+            </column>
+            <column name="available" type="BOOLEAN">
+                <constraints nullable="false"/>
+            </column>
+            <column name="capacity" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name" type="VARCHAR(20)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1699127659140-2">
+        <createTable tableName="ukubhuka">
+            <column name="id" type="VARCHAR(255)">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="ukubhuka_pkey"/>
+            </column>
+            <column name="begintime" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="contact" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="endtime" type="TIMESTAMP WITHOUT TIME ZONE"/>
+            <column name="name" type="VARCHAR(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="person" type="SMALLINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1699127659140-3">
+        <createTable tableName="ukubhuka_table_entity">
+            <column name="reservation_entity_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="table_entity_id" type="BIGINT">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="user (generated)" id="1699127659140-4">
+        <addForeignKeyConstraint baseColumnNames="table_entity_id" baseTableName="ukubhuka_table_entity" constraintName="fk5gva4lvbod5a10saygoutjwfh" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="itafula" validate="true"/>
+    </changeSet>
+    <changeSet author="user (generated)" id="1699127659140-5">
+        <addForeignKeyConstraint baseColumnNames="reservation_entity_id" baseTableName="ukubhuka_table_entity" constraintName="fkl436kiwcn06lu849c8u8mgcbs" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="ukubhuka" validate="true"/>
+    </changeSet>
+
+    <changeSet author="krisztian" id="1">
+        <insert tableName="itafula">
+            <column name="name" value="A1"></column>
+            <column name="available" valueBoolean="true"></column>
+            <column name="capacity" value="4"></column>
+        </insert>
+
+    </changeSet>
+</databaseChangeLog>
