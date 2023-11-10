@@ -20,7 +20,7 @@
         <dependency>
             <groupId>org.glassfish.jersey.core</groupId>
             <artifactId>jersey-client</artifactId>
-            <version>2.23</version>
+            <version>3.1.3</version>
         </dependency>
         <dependency>
             <groupId>org.glassfish.jersey.media</groupId>
@@ -66,6 +66,19 @@
             <version>4.13.2</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>javax.annotation</groupId>
+            <artifactId>javax.annotation-api</artifactId>
+            <version>1.3.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.ws.rs</groupId>
+            <artifactId>javax.ws.rs-api</artifactId>
+            <version>2.1.1</version>
+        </dependency>
+
     </dependencies>
     <properties>
     </properties>
@@ -84,7 +97,7 @@
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <inputSpec>${project.basedir}/src/main/resources/api-docs.yaml</inputSpec>
+                            <inputSpec>${project.basedir}/src/main/resources/api-docs.json</inputSpec>
 
                             <language>java</language>
 <!--
@@ -99,7 +112,7 @@
                             <typeMappings>
                                 <typeMapping>OffsetDateTime=java.time.LocalDateTime</typeMapping>
                             </typeMappings>
-                            <library>jersey2</library>
+                            <library>jersey3</library>
 
                             <apiPackage>hu.yokudlela.table.clients.api</apiPackage>
                             <invokerPackage>hu.yokudlela.table.clients.invoker</invokerPackage>
