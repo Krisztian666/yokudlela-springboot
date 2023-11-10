@@ -54,4 +54,11 @@ public class TableController {
         return this.repoTable.findByAvailable(true);
     }
 
+    @GetMapping("/getById/{tid}")
+    public TableEntity getById(
+            @Parameter(description = "Id of Table") @PathVariable("tid") long pTid,){
+
+        return this.repoTable.findById(pTid);
+    }
+
 }

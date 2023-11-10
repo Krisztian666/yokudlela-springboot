@@ -36,4 +36,4 @@ build/
 
 ### Mac OS ###
 .DS_Store
-/src/main/resources/docker/sql-data/
+/table/src/main/resources/docker/sql-data/
