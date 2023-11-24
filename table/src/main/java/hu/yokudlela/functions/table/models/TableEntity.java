@@ -29,10 +29,10 @@ public class TableEntity {
     @JsonIgnore
     private boolean available = true;
 
-    @Schema(description = "Székek száma az asztalnál", example = "3")
+    @Schema(description = "Székek száma az asztalnál" )
     @Min(value = 2, message = "error.table.capacity.min")
     @NotNull(message = "error.table.capacity.notset")
-    private byte capacity;
+    private long capacity;
 
 
 }

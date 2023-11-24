@@ -13,6 +13,7 @@ import org.springframework.stereotype.Component;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 
 //@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
@@ -45,7 +46,7 @@ public class ReservationComponent {
         if(res.isEmpty()) {
             res = multipleTables(tableEntities, pData.getPerson());
         }
-        int capacitySum=res.stream().mapToInt(TableEntity::getCapacity).sum();
+        long capacitySum=res.stream().mapToLong(TableEntity::getCapacity).sum();
         if(capacitySum>=pData.getPerson()){
             return saveReservation(pData,res);
         }
@@ -58,7 +59,7 @@ public class ReservationComponent {
         List list = tableEntities.stream()
                 .filter(table->table.getCapacity()>= pCapacity)
                 .toList()
-                .stream().sorted(Comparator.comparingInt(TableEntity::getCapacity))
+                .stream().sorted(Comparator.comparingLong(TableEntity::getCapacity))
                 .toList();
 
         return (list.isEmpty())?list:list.subList(0,1);
@@ -66,9 +67,9 @@ public class ReservationComponent {
     }
     private List<TableEntity> multipleTables(List<TableEntity> tableEntities, byte pCapacity){
         List<TableEntity> list = tableEntities.stream()
-                .sorted(Comparator.comparingInt(TableEntity::getCapacity).reversed())
+                .sorted(Comparator.comparingLong(TableEntity::getCapacity).reversed())
                 .toList();
-        AtomicInteger capacityOfTables = new AtomicInteger(0);
+        AtomicLong capacityOfTables = new AtomicLong(0);
         return  list.stream().takeWhile(table->((capacityOfTables.getAndAdd(table.getCapacity()))<=pCapacity)).toList();
 
     }
