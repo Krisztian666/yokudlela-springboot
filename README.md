@@ -29,6 +29,8 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
 * [Jakarta Persistence - doc](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.html)
 * [Example - baeldung](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
 
+## Hibakezelés
+[youtube](https://youtu.be/7-Y1TCBe_EI)
   
 ## Validáció
 ```
