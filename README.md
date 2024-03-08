@@ -12,6 +12,7 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
   * ha nem érvényes foglalást szeretne törölni akkor jelezzük vissza 
 
 ## Adatbázis kezelés
+[youtube](https://youtu.be/4oMU7iLa-_w) 
 ```
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -24,6 +25,7 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
         </dependency>
 ```
 * [Spring data JPA -doc ](https://docs.spring.io/spring-data/jpa/docs/current/reference/html)
+* [Spring data query methods -doc](https://docs.spring.io/spring-data/jpa/reference/jpa/query-methods.html)
 * [Jakarta Persistence - doc](https://jakarta.ee/specifications/persistence/3.0/jakarta-persistence-spec-3.0.html)
 * [Example - baeldung](https://www.baeldung.com/the-persistence-layer-with-spring-data-jpa)
 
