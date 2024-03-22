@@ -33,6 +33,8 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
 [youtube](https://youtu.be/7-Y1TCBe_EI)
   
 ## Validáció
+[youtube](https://youtu.be/qXEwM7WOcTE)
+
 ```
         <dependency>
             <groupId>org.springframework.boot</groupId>
@@ -53,6 +55,8 @@ Valósítsuk meg azt az alkalmazást amely lehetőséget biztosít egy étterem 
 * 
 
 ## Adatok másololás objektum lépdányok között
+[youtube](https://youtu.be/svT7CgHONUg)
+
 ```
   <dependency>
             <groupId>org.modelmapper</groupId>
